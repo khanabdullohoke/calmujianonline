@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin · Sistem Ujian Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <div class="topbar">
+    <div class="brand"><span class="mark">U</span> Panel Admin</div>
+    <div class="who">
+      <span id="whoBadge"></span>
+      <button class="btn-logout" id="logoutBtn">Keluar</button>
+    </div>
+  </div>
+
+  <div class="main" id="mainArea">
+
+    <!-- ===== TAB: KELAS ===== -->
+    <section id="tab-kelas">
+      <div class="flex-between mb-16">
+        <h2 style="font-size:17px;">Kelola Kelas & Jurusan</h2>
+      </div>
+      <div class="card mb-16">
+        <div class="grid grid-3">
+          <div class="field" style="margin-bottom:0;">
+            <label>Nama Kelas</label>
+            <input id="kelasNama" placeholder="XII RPL 1">
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>Jurusan</label>
+            <input id="kelasJurusan" placeholder="Rekayasa Perangkat Lunak">
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>Program Studi</label>
+            <input id="kelasProdi" placeholder="Teknik Informatika">
+          </div>
+        </div>
+        <div id="kelasErr" class="error-box mt-16"></div>
+        <button class="btn btn-primary mt-16" id="btnAddKelas">+ Tambah Kelas</button>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tblKelas">
+            <thead><tr><th>Kelas</th><th>Jurusan</th><th>Prodi</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="empty" id="kelasEmpty" style="display:none;"><div class="ic">🏫</div>Belum ada kelas.</div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: GURU ===== -->
+    <section id="tab-guru" style="display:none;">
+      <div class="flex-between mb-16">
+        <h2 style="font-size:17px;">Kelola Akun Guru</h2>
+      </div>
+      <div class="card mb-16">
+        <div class="grid grid-2">
+          <div class="field"><label>Nama Guru</label><input id="guruNama" placeholder="Budi Santoso"></div>
+          <div class="field"><label>Email</label><input id="guruEmail" type="email" placeholder="budi@sekolah.sch.id"></div>
+        </div>
+        <div class="field"><label>Kata Sandi Awal</label><input id="guruPass" placeholder="min. 6 karakter"></div>
+        <div id="guruErr" class="error-box"></div>
+        <div id="guruOk" class="success-box"></div>
+        <button class="btn btn-primary" id="btnAddGuru">+ Buat Akun Guru</button>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tblGuru">
+            <thead><tr><th>Nama</th><th>Email</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="empty" id="guruEmpty" style="display:none;"><div class="ic">👩‍🏫</div>Belum ada guru.</div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: SISWA ===== -->
+    <section id="tab-siswa" style="display:none;">
+      <div class="flex-between mb-16">
+        <h2 style="font-size:17px;">Kelola Akun Siswa</h2>
+      </div>
+      <div class="card mb-16">
+        <div class="grid grid-2">
+          <div class="field"><label>Nama Siswa</label><input id="siswaNama" placeholder="Siti Aminah"></div>
+          <div class="field"><label>Email</label><input id="siswaEmail" type="email" placeholder="siti@sekolah.sch.id"></div>
+        </div>
+        <div class="grid grid-2">
+          <div class="field"><label>Kata Sandi Awal</label><input id="siswaPass" placeholder="min. 6 karakter"></div>
+          <div class="field"><label>Kelas</label><select id="siswaKelas"><option value="">Pilih kelas...</option></select></div>
+        </div>
+        <div id="siswaErr" class="error-box"></div>
+        <div id="siswaOk" class="success-box"></div>
+        <button class="btn btn-primary" id="btnAddSiswa">+ Buat Akun Siswa</button>
+      </div>
+
+      <div class="card mb-16">
+        <label>Impor Massal dari Excel</label>
+        <p class="hint mb-16">Kolom: Nama | Email | Password | Nama Kelas (harus sama persis dengan kelas yang sudah dibuat).</p>
+        <input type="file" id="siswaExcelFile" accept=".xlsx,.xls">
+        <div id="importLog" class="hint mt-16"></div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tblSiswa">
+            <thead><tr><th>Nama</th><th>Email</th><th>Kelas</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="empty" id="siswaEmpty" style="display:none;"><div class="ic">🎓</div>Belum ada siswa.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tabbar">
+    <button class="active" data-tab="kelas"><span class="ic">🏫</span>Kelas</button>
+    <button data-tab="guru"><span class="ic">👩‍🏫</span>Guru</button>
+    <button data-tab="siswa"><span class="ic">🎓</span>Siswa</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

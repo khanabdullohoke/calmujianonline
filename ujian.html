@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mengerjakan Ujian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== layar loading ===== -->
+<div id="loadingScreen" class="exam-shell">
+  <div style="margin:auto;text-align:center;color:#8894AC;">
+    <div class="loader"></div>
+    Memuat ujian...
+  </div>
+</div>
+
+<!-- ===== layar ujian ===== -->
+<div id="examScreen" class="exam-shell" style="display:none;">
+  <div class="exam-top">
+    <div class="judul" id="examJudul">-</div>
+    <div class="timer" id="timerBox">⏱ 00:00</div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%;"></div></div>
+
+  <div class="exam-body">
+    <div class="q-counter" id="qCounter">Soal 1 dari 10</div>
+    <div class="q-card">
+      <div class="q-text" id="qText">-</div>
+      <div id="qOptions"></div>
+    </div>
+  </div>
+
+  <div class="q-grid" id="qGrid"></div>
+
+  <div class="exam-nav">
+    <button class="btn btn-outline" id="btnPrev">← Sebelumnya</button>
+    <button class="btn btn-primary" id="btnNext">Selanjutnya →</button>
+    <button class="btn btn-amber" id="btnSubmit" style="display:none;">Selesai & Kumpulkan</button>
+  </div>
+</div>
+
+<!-- ===== layar hasil ===== -->
+<div id="resultScreen" class="exam-shell" style="display:none;">
+  <div class="result-hero">
+    <div class="result-label">Ujian selesai 🎉</div>
+    <div class="result-score" id="resultScore">0</div>
+    <div class="result-label" id="resultDetail">0 dari 0 benar</div>
+  </div>
+  <div class="main" style="max-width:480px;">
+    <button class="btn btn-primary btn-block" onclick="window.location.href='siswa.html'">Kembali ke Dashboard</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ujian.js"></script>
+</body>
+</html>

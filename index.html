@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Masuk · Sistem Ujian Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-mark">U</div>
+    <h1>Sistem Ujian Online</h1>
+    <p class="sub">Masuk dengan akun yang diberikan admin/sekolah Anda.</p>
+
+    <div id="errBox" class="error-box"></div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="nama@sekolah.sch.id" required>
+      </div>
+      <div class="field">
+        <label>Kata sandi</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Masuk</button>
+    </form>
+
+    <p class="hint mt-16 center">Lupa kata sandi? Hubungi admin sekolah Anda.</p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+const form = document.getElementById("loginForm");
+const errBox = document.getElementById("errBox");
+const loginBtn = document.getElementById("loginBtn");
+
+// Kalau sudah login, langsung lempar ke dashboard sesuai role.
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    const doc = await db.collection("users").doc(user.uid).get();
+    if (doc.exists) redirectByRole(doc.data().role);
+  }
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errBox.classList.remove("show");
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Memeriksa...";
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  try {
+    const cred = await auth.signInWithEmailAndPassword(email, password);
+    const doc = await db.collection("users").doc(cred.user.uid).get();
+    if (!doc.exists) {
+      throw new Error("Akun ditemukan tapi profil tidak ada di database. Hubungi admin.");
+    }
+    redirectByRole(doc.data().role);
+  } catch (err) {
+    let msg = "Email atau kata sandi salah.";
+    if (err.message && err.message.includes("profil")) msg = err.message;
+    errBox.textContent = msg;
+    errBox.classList.add("show");
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Masuk";
+  }
+});
+</script>
+</body>
+</html>

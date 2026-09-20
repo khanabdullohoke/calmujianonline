@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isLoggedIn() {
+      return request.auth != null;
+    }
+    function myProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    function myRole() {
+      return isLoggedIn() ? myProfile().role : null;
+    }
+    function isAdmin() { return myRole() == 'admin'; }
+    function isGuru() { return myRole() == 'guru'; }
+    function isSiswa() { return myRole() == 'siswa'; }
+
+    // Profil pengguna (admin/guru/siswa)
+    match /users/{uid} {
+      allow read: if isLoggedIn() && (request.auth.uid == uid || isAdmin() || isGuru());
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Kelas & jurusan — semua yang login boleh baca, hanya admin yang ubah
+    match /kelas/{kelasId} {
+      allow read: if isLoggedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Ujian & soal
+    match /ujian/{ujianId} {
+      allow read: if isLoggedIn() && (
+        isAdmin() ||
+        (isGuru() && resource.data.guruId == request.auth.uid) ||
+        (isSiswa() && resource.data.status == 'aktif' && resource.data.kelasIds.hasAny([myProfile().kelasId]))
+      );
+      allow create: if isGuru() && request.resource.data.guruId == request.auth.uid;
+      allow update, delete: if isGuru() && resource.data.guruId == request.auth.uid;
+    }
+
+    // Hasil ujian siswa
+    match /hasil/{hasilId} {
+      allow create: if isSiswa() && request.resource.data.siswaId == request.auth.uid;
+      allow read: if isLoggedIn() && (
+        isAdmin() ||
+        resource.data.siswaId == request.auth.uid ||
+        (isGuru() && get(/databases/$(database)/documents/ujian/$(resource.data.ujianId)).data.guruId == request.auth.uid)
+      );
+      allow update, delete: if false; // hasil ujian bersifat final, tidak boleh diubah
+    }
+  }
+}
