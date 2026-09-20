@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Desain Baru · Sistem Ujian Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .showcase-wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px;}
+  .showcase-note{background:#0B1220;color:#B9C3D6;padding:14px 18px;border-radius:14px;font-size:13.5px;margin-bottom:28px;}
+  .showcase-note b{color:#FFC670;}
+  .showcase-block{margin-bottom:44px;}
+  .showcase-block h2{font-family:'Poppins';font-size:18px;margin-bottom:4px;}
+  .showcase-block p.d{color:var(--ink-500);font-size:13px;margin:0 0 16px;}
+  .frame{border-radius:18px;overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--line);}
+  .frame-dark{background:var(--navy-950);}
+  .frame-pad{padding:22px;}
+</style>
+</head>
+<body style="background:var(--paper-50);">
+
+<div class="showcase-wrap">
+  <h1 style="font-family:'Poppins';font-size:24px;">🎨 Preview Desain Baru</h1>
+  <div class="showcase-note">Halaman ini <b>hanya untuk melihat tampilan</b> memakai data contoh — tidak terhubung ke Firebase. File asli (admin.html, guru.html, siswa.html, ujian.html) tetap terhubung penuh ke akun &amp; database Anda seperti biasa.</div>
+
+  <!-- Dashboard admin -->
+  <div class="showcase-block">
+    <h2>1. Dashboard Admin</h2>
+    <p class="d">Kartu ringkasan di bagian atas + tabel yang lebih rapi.</p>
+    <div class="frame frame-pad" style="background:#fff;">
+      <div class="stat-grid" style="margin-bottom:18px;">
+        <div class="stat-card blue"><div class="stat-ic">🏫</div><div class="stat-num">6</div><div class="stat-label">Total Kelas</div></div>
+        <div class="stat-card amber"><div class="stat-ic">👩‍🏫</div><div class="stat-num">9</div><div class="stat-label">Total Guru</div></div>
+        <div class="stat-card green"><div class="stat-ic">🎓</div><div class="stat-num">214</div><div class="stat-label">Total Siswa</div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kelas</th><th>Jurusan</th><th>Prodi</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>XII RPL 1</td><td>Rekayasa Perangkat Lunak</td><td>Teknik Informatika</td><td><button class="btn btn-sm btn-danger">Hapus</button></td></tr>
+            <tr><td>XII RPL 2</td><td>Rekayasa Perangkat Lunak</td><td>Teknik Informatika</td><td><button class="btn btn-sm btn-danger">Hapus</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guru rekap + unduh -->
+  <div class="showcase-block">
+    <h2>2. Rekap Hasil Guru + Fitur Unduh Excel</h2>
+    <p class="d">Tombol "⬇ Unduh Excel Rekap" mengekspor tabel hasil (lengkap dengan ringkasan) menjadi file .xlsx.</p>
+    <div class="frame frame-pad" style="background:#fff;">
+      <div class="flex-between flex-wrap gap-8 mb-16">
+        <span class="hint" style="margin:0;">24 siswa telah mengerjakan</span>
+        <button class="btn btn-sm btn-teal">⬇ Unduh Excel Rekap</button>
+      </div>
+      <div class="grid grid-3 mb-16">
+        <div class="stat-card blue"><div class="stat-ic">📈</div><div class="stat-num">78.4</div><div class="stat-label">Rata-rata Nilai</div></div>
+        <div class="stat-card green"><div class="stat-ic">🏆</div><div class="stat-num">100</div><div class="stat-label">Nilai Tertinggi</div></div>
+        <div class="stat-card red"><div class="stat-ic">📉</div><div class="stat-num">45</div><div class="stat-label">Nilai Terendah</div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Nama Siswa</th><th>Kelas</th><th>Nilai</th><th>Selesai</th></tr></thead>
+          <tbody>
+            <tr><td class="rank-1">🥇</td><td>Siti Aminah</td><td>XII RPL 1</td><td><b>100</b></td><td>19 Sep 2026, 09:41</td></tr>
+            <tr><td class="rank-2">🥈</td><td>Budi Santoso</td><td>XII RPL 1</td><td><b>92</b></td><td>19 Sep 2026, 09:38</td></tr>
+            <tr><td class="rank-3">🥉</td><td>Dewi Lestari</td><td>XII RPL 2</td><td><b>88</b></td><td>19 Sep 2026, 09:50</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Siswa riwayat + unduh PDF -->
+  <div class="showcase-block">
+    <h2>3. Riwayat Nilai Siswa + Unduh Kartu Nilai (PDF)</h2>
+    <p class="d">Setiap hasil ujian punya tombol unduh kartu nilai pribadi dalam format PDF.</p>
+    <div class="frame frame-pad" style="background:#fff;max-width:480px;">
+      <div class="flex-between">
+        <div class="flex items-center gap-10">
+          <div class="grade-chip grade-A">A</div>
+          <div>
+            <div style="font-weight:700;font-family:'Poppins';">Ulangan Harian Bab 3</div>
+            <div class="hint">19 Sep 2026, 09:41 · 18/20 benar</div>
+          </div>
+        </div>
+        <div style="font-size:24px;font-weight:700;color:var(--blue-600);font-family:'Poppins';">90</div>
+      </div>
+      <button class="btn btn-sm btn-outline mt-16">⬇ Unduh Kartu Nilai (PDF)</button>
+    </div>
+  </div>
+
+  <!-- Exam taking -->
+  <div class="showcase-block">
+    <h2>4. Tampilan Saat Mengerjakan Ujian</h2>
+    <p class="d">Tema gelap agar fokus, timer berubah warna saat waktu menipis, progress bar bercahaya.</p>
+    <div class="frame frame-dark">
+      <div class="exam-top">
+        <div class="judul"><span class="dot"></span>Ulangan Harian Bab 3 - Algoritma</div>
+        <div class="timer warn">⏱ 04:32</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:65%;"></div></div>
+      <div class="exam-body">
+        <div class="q-counter"><span class="pill">Soal 13 dari 20</span></div>
+        <div class="q-card">
+          <div class="q-text">Manakah struktur data yang bekerja dengan prinsip LIFO (Last In First Out)?</div>
+          <div>
+            <div class="opt"><div class="letter">A</div><div class="txt">Queue</div></div>
+            <div class="opt selected"><div class="letter">B</div><div class="txt">Stack</div></div>
+            <div class="opt"><div class="letter">C</div><div class="txt">Array</div></div>
+            <div class="opt"><div class="letter">D</div><div class="txt">Linked List</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="q-grid" style="max-width:640px;">
+        <button class="answered">1</button><button class="answered">2</button><button class="answered">3</button>
+        <button class="current">4</button><button>5</button><button>6</button>
+      </div>
+      <div class="exam-nav">
+        <button class="btn btn-outline">← Sebelumnya</button>
+        <button class="btn btn-primary">Selanjutnya →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result screen -->
+  <div class="showcase-block">
+    <h2>5. Layar Hasil Selesai Ujian</h2>
+    <p class="d">Skor ditampilkan dengan ring animasi + lencana predikat, plus tombol unduh hasil.</p>
+    <div class="frame frame-dark" style="max-width:420px;">
+      <div class="result-hero">
+        <div class="result-label">Ujian selesai 🎉</div>
+        <div class="result-ring-wrap">
+          <svg viewBox="0 0 140 140" width="168" height="168">
+            <defs>
+              <linearGradient id="ringGradPreview" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F2A93B"/><stop offset="100%" stop-color="#DC8F1E"/>
+              </linearGradient>
+            </defs>
+            <circle class="result-ring-bg" cx="70" cy="70" r="60"></circle>
+            <circle class="result-ring-fg" cx="70" cy="70" r="60" stroke="url(#ringGradPreview)" stroke-dasharray="377" stroke-dashoffset="60"></circle>
+          </svg>
+          <div class="result-score">90</div>
+        </div>
+        <div class="result-label">18 dari 20 soal benar</div>
+        <div class="result-badge badge badge-green">🌟 Sangat Baik</div>
+      </div>
+      <div style="padding:20px;">
+        <button class="btn btn-teal btn-block mb-16">⬇ Unduh Hasil (PDF)</button>
+        <button class="btn btn-primary btn-block">Kembali ke Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div class="showcase-block">
+    <h2>6. Halaman Login (split-screen di layar besar)</h2>
+    <p class="d">Panel kiri berisi highlight fitur, form login tetap sederhana di kanan.</p>
+    <div class="frame" style="height:360px;">
+      <div class="login-wrap" style="min-height:360px;">
+        <div class="login-visual" style="display:flex;">
+          <div class="lv-inner">
+            <div class="lv-mark">U</div>
+            <h2 style="font-size:20px;">Sistem Ujian Online, lebih rapi &amp; tanpa kertas.</h2>
+            <p style="font-size:12.5px;">Satu tempat untuk admin, guru, dan siswa.</p>
+          </div>
+        </div>
+        <div class="login-form-side" style="min-width:280px;">
+          <div class="login-card" style="box-shadow:none;">
+            <div class="login-mark">U</div>
+            <h1 style="font-size:19px;">Sistem Ujian Online</h1>
+            <p class="sub">Masuk dengan akun Anda.</p>
+            <div class="field"><label>Email</label><input placeholder="nama@sekolah.sch.id"></div>
+            <div class="field"><label>Kata sandi</label><input type="password" placeholder="••••••••"></div>
+            <button class="btn btn-primary btn-block">Masuk</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

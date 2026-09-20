@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Siswa · Sistem Ujian Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <div class="topbar">
+    <div class="brand"><span class="mark">U</span> Ujian Saya</div>
+    <div class="who">
+      <span id="whoBadge"></span>
+      <button class="btn-logout" id="logoutBtn">↪ Keluar</button>
+    </div>
+  </div>
+
+  <div class="main" id="mainArea">
+
+    <div class="page-head">
+      <h1 id="greetTitle">Halo! 👋</h1>
+      <p>Kerjakan ujian yang tersedia dan pantau riwayat nilaimu.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card amber"><div class="stat-ic">📝</div><div class="stat-num" id="statTersedia">0</div><div class="stat-label">Ujian Tersedia</div></div>
+      <div class="stat-card green"><div class="stat-ic">✅</div><div class="stat-num" id="statSelesai">0</div><div class="stat-label">Ujian Selesai</div></div>
+      <div class="stat-card blue"><div class="stat-ic">📈</div><div class="stat-num" id="statRata">-</div><div class="stat-label">Rata-rata Nilai</div></div>
+    </div>
+
+    <section id="tab-tersedia">
+      <h2 style="font-size:17px;" class="mb-16">📝 Ujian Tersedia</h2>
+      <div id="listUjianTersedia"></div>
+      <div class="empty" id="tersediaEmpty" style="display:none;"><div class="ic-wrap">🎉</div>Tidak ada ujian aktif untuk kelasmu saat ini.</div>
+    </section>
+
+    <section id="tab-riwayat" style="display:none;">
+      <h2 style="font-size:17px;" class="mb-16">🏆 Riwayat Hasil</h2>
+      <div id="listRiwayat"></div>
+      <div class="empty" id="riwayatEmpty" style="display:none;"><div class="ic-wrap">📭</div>Belum ada ujian yang kamu kerjakan.</div>
+    </section>
+  </div>
+
+  <div class="tabbar">
+    <button class="active" data-tab="tersedia"><span class="ic">📝</span>Tersedia</button>
+    <button data-tab="riwayat"><span class="ic">🏆</span>Riwayat</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/siswa.js"></script>
+</body>
+</html>
