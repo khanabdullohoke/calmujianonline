@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mengerjakan Ujian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- ===== layar loading ===== -->
 <div id="loadingScreen" class="exam-shell">
-  <div style="margin:auto;text-align:center;color:#8894AC;">
+  <div style="margin:auto;text-align:center;color:var(--ink-500);">
     <div class="loader"></div>
     Memuat ujian...
   </div>
@@ -22,7 +22,7 @@
 <div id="examScreen" class="exam-shell" style="display:none;">
   <div class="exam-top">
     <div class="judul"><span class="dot"></span><span id="examJudul">-</span></div>
-    <div class="timer" id="timerBox">⏱ 00:00</div>
+    <div class="timer" id="timerBox"><i data-ic="clock"></i> 00:00</div>
   </div>
   <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%;"></div></div>
 
@@ -37,22 +37,22 @@
   <div class="q-grid" id="qGrid"></div>
 
   <div class="exam-nav">
-    <button class="btn btn-outline" id="btnPrev">← Sebelumnya</button>
-    <button class="btn btn-primary" id="btnNext">Selanjutnya →</button>
-    <button class="btn btn-amber" id="btnSubmit" style="display:none;">✓ Selesai &amp; Kumpulkan</button>
+    <button class="btn btn-outline" id="btnPrev"><i data-ic="arrowL"></i> Sebelumnya</button>
+    <button class="btn btn-primary" id="btnNext">Selanjutnya <i data-ic="arrowR"></i></button>
+    <button class="btn btn-primary" id="btnSubmit" style="display:none;"><i data-ic="tick"></i> Selesai &amp; Kumpulkan</button>
   </div>
 </div>
 
 <!-- ===== layar hasil ===== -->
 <div id="resultScreen" class="exam-shell" style="display:none;">
   <div class="result-hero" id="resultHero">
-    <div class="result-label">Ujian selesai 🎉</div>
+    <div class="result-label">Ujian selesai</div>
     <div class="result-ring-wrap">
       <svg viewBox="0 0 140 140" width="168" height="168">
         <defs>
           <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#F2A93B"/>
-            <stop offset="100%" stop-color="#DC8F1E"/>
+            <stop offset="0%" stop-color="#E4F0FC"/>
+            <stop offset="100%" stop-color="#8DB4E6"/>
           </linearGradient>
         </defs>
         <circle class="result-ring-bg" cx="70" cy="70" r="60"></circle>
@@ -65,7 +65,7 @@
   </div>
   <div class="main" style="max-width:480px;">
     <div class="result-actions">
-      <button class="btn btn-teal btn-block" id="btnUnduhHasil">⬇ Unduh Hasil (PDF)</button>
+      <button class="btn btn-soft btn-block" id="btnUnduhHasil"><i data-ic="download"></i> Unduh Hasil (PDF)</button>
       <button class="btn btn-primary btn-block" onclick="window.location.href='siswa.html'">Kembali ke Dashboard</button>
     </div>
   </div>
@@ -75,6 +75,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/icons.js"></script>
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/ujian.js"></script>
