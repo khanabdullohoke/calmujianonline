@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guru · Sistem Ujian Online</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <div class="brand"><span class="mark">U</span> Panel Guru</div>
     <div class="who">
       <span id="whoBadge"></span>
-      <button class="btn-logout" id="logoutBtn">↪ Keluar</button>
+      <button class="btn-logout" id="logoutBtn"><i data-ic="logout"></i> Keluar</button>
     </div>
   </div>
 
@@ -26,16 +26,16 @@
     </div>
 
     <div class="stat-grid">
-      <div class="stat-card blue"><div class="stat-ic">📝</div><div class="stat-num" id="statTotalUjian">0</div><div class="stat-label">Total Ujian</div></div>
-      <div class="stat-card green"><div class="stat-ic">✅</div><div class="stat-num" id="statAktif">0</div><div class="stat-label">Sedang Aktif</div></div>
-      <div class="stat-card amber"><div class="stat-ic">❓</div><div class="stat-num" id="statTotalSoal">0</div><div class="stat-label">Total Soal Dibuat</div></div>
+      <div class="stat-card blue"><div class="stat-ic"><i data-ic="file"></i></div><div class="stat-num" id="statTotalUjian">0</div><div class="stat-label">Total Ujian</div></div>
+      <div class="stat-card green"><div class="stat-ic"><i data-ic="check"></i></div><div class="stat-num" id="statAktif">0</div><div class="stat-label">Sedang Aktif</div></div>
+      <div class="stat-card amber"><div class="stat-ic"><i data-ic="help"></i></div><div class="stat-num" id="statTotalSoal">0</div><div class="stat-label">Total Soal Dibuat</div></div>
     </div>
 
     <!-- ===== TAB: UJIAN & SOAL ===== -->
     <section id="tab-ujian">
       <div class="flex-between mb-16">
-        <h2 style="font-size:17px;">📝 Ujian Saya</h2>
-        <button class="btn btn-amber btn-sm" id="btnShowForm">＋ Buat Ujian</button>
+        <h2 class="h-section"><i data-ic="file"></i> Ujian Saya</h2>
+        <button class="btn btn-primary btn-sm" id="btnShowForm"><i data-ic="plus"></i> Buat Ujian</button>
       </div>
 
       <div class="card mb-16" id="formUjian" style="display:none;">
@@ -58,12 +58,12 @@
       </div>
 
       <div id="listUjian"></div>
-      <div class="empty" id="ujianEmpty" style="display:none;"><div class="ic-wrap">📝</div>Belum ada ujian. Klik "＋ Buat Ujian".</div>
+      <div class="empty" id="ujianEmpty" style="display:none;"><div class="ic-wrap"><i data-ic="file"></i></div>Belum ada ujian. Klik "<i data-ic="plus"></i> Buat Ujian".</div>
     </section>
 
     <!-- ===== TAB: REKAP HASIL ===== -->
     <section id="tab-hasil" style="display:none;">
-      <h2 style="font-size:17px;" class="mb-16">📊 Rekap Hasil Ujian</h2>
+      <h2 class="h-section mb-16"><i data-ic="chart"></i> Rekap Hasil Ujian</h2>
       <div class="card mb-16">
         <div class="grid grid-2">
           <div class="field"><label>Pilih Ujian</label><select id="hasilUjianSelect"><option value="">Pilih...</option></select></div>
@@ -71,7 +71,7 @@
         </div>
         <div class="flex-between" style="flex-wrap:wrap;gap:8px;">
           <span class="hint" style="margin:0;" id="hasilCountHint"></span>
-          <button class="btn btn-sm btn-teal" id="btnUnduhExcel">⬇ Unduh Excel Rekap</button>
+          <button class="btn btn-sm btn-soft" id="btnUnduhExcel"><i data-ic="download"></i> Unduh Excel Rekap</button>
         </div>
       </div>
       <div id="ringkasanHasil" class="grid grid-3 mb-16"></div>
@@ -82,15 +82,15 @@
             <tbody></tbody>
           </table>
         </div>
-        <div class="empty" id="hasilEmpty" style="display:none;"><div class="ic-wrap">📊</div>Belum ada siswa yang mengerjakan ujian ini.</div>
+        <div class="empty" id="hasilEmpty" style="display:none;"><div class="ic-wrap"><i data-ic="chart"></i></div>Belum ada siswa yang mengerjakan ujian ini.</div>
       </div>
     </section>
 
   </div>
 
   <div class="tabbar">
-    <button class="active" data-tab="ujian"><span class="ic">📝</span>Ujian &amp; Soal</button>
-    <button data-tab="hasil"><span class="ic">📊</span>Rekap Hasil</button>
+    <button class="active" data-tab="ujian"><span class="ic"><i data-ic="file"></i></span>Ujian &amp; Soal</button>
+    <button data-tab="hasil"><span class="ic"><i data-ic="chart"></i></span>Rekap Hasil</button>
   </div>
 </div>
 
@@ -98,6 +98,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/icons.js"></script>
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/guru.js"></script>
