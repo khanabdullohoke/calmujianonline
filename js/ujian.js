@@ -35,10 +35,10 @@ guardPage(["siswa"]).then(async (p) => {
 
 function gagalMuat(pesan) {
   document.getElementById("loadingScreen").innerHTML =
-    `<div style="margin:auto;text-align:center;color:#DDE4F0;padding:0 24px;">
-      <div style="font-size:34px;margin-bottom:10px;">⚠️</div>
-      <div style="margin-bottom:18px;">${esc(pesan)}</div>
-      <button class="btn btn-amber" onclick="window.location.href='siswa.html'">Kembali</button>
+    `<div style="margin:auto;text-align:center;color:var(--ink-700);padding:0 24px;">
+      <div class="ic-wrap" style="background:var(--red-50);color:var(--red-500);">${IC.alert}</div>
+      <div style="margin-bottom:20px;">${esc(pesan)}</div>
+      <button class="btn btn-primary" onclick="window.location.href='siswa.html'">Kembali</button>
     </div>`;
 }
 
@@ -80,7 +80,7 @@ function updateTimerDisplay() {
   const m = Math.floor(sisaDetik / 60);
   const s = sisaDetik % 60;
   const box = document.getElementById("timerBox");
-  box.textContent = `⏱ ${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  box.innerHTML = `${IC.clock} ${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   box.className = "timer" + (sisaDetik <= 60 ? " danger" : sisaDetik <= 300 ? " warn" : "");
 }
 
@@ -208,15 +208,15 @@ function tampilkanHasil(nilai, benar, total, otomatis) {
 }
 
 function predikat(nilai) {
-  if (nilai >= 85) return { label: "🌟 Sangat Baik", cls: "badge-green" };
-  if (nilai >= 70) return { label: "👍 Baik", cls: "badge-blue" };
-  if (nilai >= 55) return { label: "📘 Cukup", cls: "badge-amber" };
-  return { label: "💪 Perlu Belajar Lagi", cls: "badge-red" };
+  if (nilai >= 85) return { label: "Sangat Baik", cls: "badge-green" };
+  if (nilai >= 70) return { label: "Baik", cls: "badge-blue" };
+  if (nilai >= 55) return { label: "Cukup", cls: "badge-amber" };
+  return { label: "Perlu Belajar Lagi", cls: "badge-red" };
 }
 
 function tembakConfetti() {
   const hero = document.getElementById("resultHero");
-  const warna = ["#F2A93B", "#3B74C4", "#3EAA6D", "#FFD98A", "#E15554"];
+  const warna = ["#F0F8FF", "#8DB4E6", "#5B8DD6", "#D3E5F8", "#2F66BD"];
   for (let i = 0; i < 26; i++) {
     const el = document.createElement("div");
     el.className = "confetti-piece";
@@ -239,11 +239,11 @@ document.getElementById("btnUnduhHasil").addEventListener("click", () => {
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
 
-  doc.setFillColor(11, 18, 32);
+  doc.setFillColor(10, 31, 68);
   doc.rect(0, 0, W, 96, "F");
-  doc.setFillColor(242, 169, 59);
+  doc.setFillColor(240, 248, 255);
   doc.roundedRect(28, 24, 44, 44, 10, 10, "F");
-  doc.setTextColor(11, 18, 32);
+  doc.setTextColor(10, 31, 68);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.text("U", 50, 52, { align: "center" });
@@ -252,11 +252,11 @@ document.getElementById("btnUnduhHasil").addEventListener("click", () => {
   doc.text("Kartu Hasil Ujian", 86, 46);
   doc.setFontSize(9.5);
   doc.setFont("helvetica", "normal");
-  doc.setTextColor(180, 195, 220);
+  doc.setTextColor(180, 199, 230);
   doc.text("Sistem Ujian Online", 86, 62);
 
   let y = 130;
-  doc.setTextColor(27, 36, 48);
+  doc.setTextColor(11, 27, 58);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13.5);
   doc.text(String(hasilTerakhir.judul || "-"), 28, y);
@@ -270,26 +270,26 @@ document.getElementById("btnUnduhHasil").addEventListener("click", () => {
     ["Jawaban Benar", `${hasilTerakhir.benar} dari ${hasilTerakhir.total} soal`]
   ];
   baris.forEach(([label, val]) => {
-    doc.setTextColor(140, 150, 165);
+    doc.setTextColor(136, 149, 173);
     doc.text(label, 28, y);
-    doc.setTextColor(27, 36, 48);
+    doc.setTextColor(11, 27, 58);
     doc.text(String(val), 150, y);
     y += 20;
   });
 
   const cx = W / 2, cy = y + 78, r = 56;
-  doc.setDrawColor(230, 234, 240);
+  doc.setDrawColor(211, 229, 248);
   doc.setLineWidth(10);
   doc.circle(cx, cy, r, "S");
-  doc.setDrawColor(242, 169, 59);
+  doc.setDrawColor(30, 78, 156);
   doc.circle(cx, cy, r, "S");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
-  doc.setTextColor(220, 143, 30);
+  doc.setTextColor(15, 42, 92);
   doc.text(String(hasilTerakhir.nilai ?? 0), cx, cy + 10, { align: "center" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  doc.setTextColor(140, 150, 165);
+  doc.setTextColor(136, 149, 173);
   doc.text("NILAI AKHIR", cx, cy + r + 22, { align: "center" });
 
   doc.setFontSize(8.5);
