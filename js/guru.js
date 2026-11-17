@@ -89,7 +89,7 @@ function updateStats() {
   document.getElementById("statTotalUjian").textContent = ujianCache.length;
   document.getElementById("statAktif").textContent = ujianCache.filter((u) => u.status === "aktif").length;
   document.getElementById("statTotalSoal").textContent = ujianCache.reduce((sum, u) => sum + (u.soal?.length || 0), 0);
-  if (profile?.nama) document.getElementById("greetTitle").textContent = `Halo, ${profile.nama.split(" ")[0]} 👋`;
+  if (profile?.nama) document.getElementById("greetTitle").textContent = `Halo, ${profile.nama.split(" ")[0]}`;
 }
 
 function renderUjianList() {
@@ -104,13 +104,13 @@ function renderUjianList() {
     <div class="card hoverable mb-16">
       <div class="flex-between">
         <div>
-          <div style="font-weight:700;font-size:15.5px;font-family:'Poppins';margin-bottom:4px;">${esc(u.judul)} ${statusBadge}</div>
-          <div class="hint">❓ ${u.soal.length} soal · ⏱ ${u.durasiMenit} menit · 🏫 ${esc(namaKelas) || "-"}</div>
+          <div class="exam-card-title" style="margin-bottom:5px;">${esc(u.judul)} &nbsp;${statusBadge}</div>
+          <div class="hint">${IC.help} ${u.soal.length} soal &nbsp;·&nbsp; ${IC.clock} ${u.durasiMenit} menit &nbsp;·&nbsp; ${IC.school} ${esc(namaKelas) || "-"}</div>
         </div>
       </div>
       <div class="flex gap-8 mt-16" style="flex-wrap:wrap;">
-        <button class="btn btn-sm btn-outline" onclick="toggleSoalPanel('${u.id}')">📄 Kelola Soal</button>
-        <button class="btn btn-sm ${u.status === "aktif" ? "btn-danger" : "btn-amber"}" onclick="toggleStatus('${u.id}','${u.status}')">
+        <button class="btn btn-sm btn-outline" onclick="toggleSoalPanel('${u.id}')">${IC.file} Kelola Soal</button>
+        <button class="btn btn-sm ${u.status === "aktif" ? "btn-danger" : "btn-primary"}" onclick="toggleStatus('${u.id}','${u.status}')">
           ${u.status === "aktif" ? "Nonaktifkan" : "Aktifkan untuk Siswa"}
         </button>
         <button class="btn btn-sm btn-danger" onclick="hapusUjian('${u.id}')">Hapus</button>
@@ -235,9 +235,9 @@ async function loadHasil() {
     const kelas = kelasCache.find((k) => k.id === r.kelasId);
     const waktu = formatWaktu(r.selesaiPada);
     const rankCls = i === 0 ? "rank-1" : i === 1 ? "rank-2" : i === 2 ? "rank-3" : "";
-    const rankIcon = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : (i + 1);
+    const rankIcon = `<span class="rank-chip ${rankCls}">${i + 1}</span>`;
     tbody.innerHTML += `<tr>
-      <td class="${rankCls}">${rankIcon}</td>
+      <td>${rankIcon}</td>
       <td>${esc(r.siswaNama)}</td><td>${esc(kelas?.nama || "-")}</td><td>${esc(kelas?.jurusan || "-")}</td>
       <td><b>${r.nilai}</b></td><td>${waktu}</td>
     </tr>`;
@@ -249,9 +249,9 @@ async function loadHasil() {
     const tertinggi = Math.max(...nilaiArr);
     const terendah = Math.min(...nilaiArr);
     ringkasan.innerHTML = `
-      <div class="stat-card blue"><div class="stat-ic">📈</div><div class="stat-num">${rata}</div><div class="stat-label">Rata-rata Nilai</div></div>
-      <div class="stat-card green"><div class="stat-ic">🏆</div><div class="stat-num">${tertinggi}</div><div class="stat-label">Nilai Tertinggi</div></div>
-      <div class="stat-card red"><div class="stat-ic">📉</div><div class="stat-num">${terendah}</div><div class="stat-label">Nilai Terendah</div></div>
+      <div class="stat-card blue"><div class="stat-ic">${IC.trendup}</div><div class="stat-num">${rata}</div><div class="stat-label">Rata-rata Nilai</div></div>
+      <div class="stat-card green"><div class="stat-ic">${IC.trophy}</div><div class="stat-num">${tertinggi}</div><div class="stat-label">Nilai Tertinggi</div></div>
+      <div class="stat-card red"><div class="stat-ic">${IC.trenddown}</div><div class="stat-num">${terendah}</div><div class="stat-label">Nilai Terendah</div></div>
     `;
   }
 }
