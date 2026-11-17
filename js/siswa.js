@@ -119,28 +119,34 @@ function unduhKartuNilai(i) {
   });
 }
 
-function buatPdfKartuNilai(data) {
+async function buatPdfKartuNilai(data) {
+  const logo = await loadLogoForPdf();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "pt", format: "a5" });
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
 
   // header band
-  doc.setFillColor(10, 31, 68);
+  doc.setFillColor(11, 61, 145);
   doc.rect(0, 0, W, 96, "F");
-  doc.setFillColor(240, 248, 255);
+  doc.setFillColor(255, 255, 255);
   doc.roundedRect(28, 24, 44, 44, 10, 10, "F");
-  doc.setTextColor(10, 31, 68);
+  doc.setTextColor(11, 61, 145);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
-  doc.text("U", 50, 52, { align: "center" });
+  if (logo) {
+    const box = 34, k = Math.min(box / logo.w, box / logo.h), lw = logo.w * k, lh = logo.h * k;
+    doc.addImage(logo.data, logo.type, 50 - lw / 2, 46 - lh / 2, lw, lh);
+  } else {
+    doc.text("C", 50, 52, { align: "center" });
+  }
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(15);
   doc.text("Kartu Hasil Ujian", 86, 46);
   doc.setFontSize(9.5);
   doc.setFont("helvetica", "normal");
-  doc.setTextColor(180, 199, 230);
-  doc.text("Sistem Ujian Online", 86, 62);
+  doc.setTextColor(190, 210, 245);
+  doc.text("SMK Ciledug Al Musaddadiyah", 86, 62);
 
   let y = 130;
   doc.setTextColor(11, 27, 58);
@@ -170,11 +176,11 @@ function buatPdfKartuNilai(data) {
   doc.setDrawColor(211, 229, 248);
   doc.setLineWidth(10);
   doc.circle(cx, cy, r, "S");
-  doc.setDrawColor(30, 78, 156);
+  doc.setDrawColor(33, 96, 196);
   doc.circle(cx, cy, r, "S");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
-  doc.setTextColor(15, 42, 92);
+  doc.setTextColor(11, 61, 145);
   doc.text(String(data.nilai ?? 0), cx, cy + 10, { align: "center" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
