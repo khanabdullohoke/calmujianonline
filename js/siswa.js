@@ -3,7 +3,7 @@ let profile = null;
 guardPage(["siswa"]).then((p) => {
   profile = p;
   fillWhoBadge("whoBadge", p);
-  document.getElementById("greetTitle").textContent = `Halo, ${(p.nama || "Siswa").split(" ")[0]} 👋`;
+  document.getElementById("greetTitle").textContent = `Halo, ${(p.nama || "Siswa").split(" ")[0]}`;
   loadUjianTersedia();
   loadRiwayat();
 });
@@ -46,12 +46,12 @@ async function loadUjianTersedia() {
     <div class="card hoverable mb-16">
       <div class="flex-between">
         <div>
-          <div style="font-weight:700;font-size:15.5px;font-family:'Poppins';">${esc(u.judul)}</div>
-          <div class="hint mt-8">⏱ ${u.durasiMenit} menit · ❓ ${u.soal.length} soal · 👩‍🏫 ${esc(u.guruNama)}</div>
+          <div class="exam-card-title">${esc(u.judul)}</div>
+          <div class="hint mt-8">${IC.clock} ${u.durasiMenit} menit &nbsp;·&nbsp; ${IC.help} ${u.soal.length} soal &nbsp;·&nbsp; ${IC.teacher} ${esc(u.guruNama)}</div>
         </div>
-        <span class="badge badge-amber">Aktif</span>
+        <span class="badge badge-blue"><span class="badge-dot"></span>Aktif</span>
       </div>
-      <button class="btn btn-amber btn-block mt-16" onclick="mulaiUjian('${u.id}')">▶ Mulai Ujian</button>
+      <button class="btn btn-primary btn-block mt-16" onclick="mulaiUjian('${u.id}')">${IC.play} Mulai Ujian</button>
     </div>
   `).join("");
 }
@@ -85,13 +85,13 @@ async function loadRiwayat() {
         <div class="flex items-center gap-10">
           <div class="grade-chip grade-${grade}">${grade}</div>
           <div>
-            <div style="font-weight:700;font-family:'Poppins';">${esc(r.ujianJudul)}</div>
+            <div class="exam-card-title">${esc(r.ujianJudul)}</div>
             <div class="hint">${waktu} · ${r.benar ?? "-"}/${r.totalSoal ?? "-"} benar</div>
           </div>
         </div>
-        <div style="font-size:24px;font-weight:700;color:var(--blue-600);font-family:'Poppins';">${r.nilai}</div>
+        <div class="score-num">${r.nilai}</div>
       </div>
-      <button class="btn btn-sm btn-outline mt-16" onclick="unduhKartuNilai(${i})">⬇ Unduh Kartu Nilai (PDF)</button>
+      <button class="btn btn-sm btn-outline mt-16" onclick="unduhKartuNilai(${i})">${IC.download} Unduh Kartu Nilai (PDF)</button>
     </div>`;
   }).join("");
 }
@@ -126,11 +126,11 @@ function buatPdfKartuNilai(data) {
   const H = doc.internal.pageSize.getHeight();
 
   // header band
-  doc.setFillColor(11, 18, 32);
+  doc.setFillColor(10, 31, 68);
   doc.rect(0, 0, W, 96, "F");
-  doc.setFillColor(242, 169, 59);
+  doc.setFillColor(240, 248, 255);
   doc.roundedRect(28, 24, 44, 44, 10, 10, "F");
-  doc.setTextColor(11, 18, 32);
+  doc.setTextColor(10, 31, 68);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.text("U", 50, 52, { align: "center" });
@@ -139,11 +139,11 @@ function buatPdfKartuNilai(data) {
   doc.text("Kartu Hasil Ujian", 86, 46);
   doc.setFontSize(9.5);
   doc.setFont("helvetica", "normal");
-  doc.setTextColor(180, 195, 220);
+  doc.setTextColor(180, 199, 230);
   doc.text("Sistem Ujian Online", 86, 62);
 
   let y = 130;
-  doc.setTextColor(27, 36, 48);
+  doc.setTextColor(11, 27, 58);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(13.5);
   doc.text(String(data.judul || "-"), 28, y);
@@ -158,27 +158,27 @@ function buatPdfKartuNilai(data) {
     ["Jawaban Benar", `${data.benar ?? "-"} dari ${data.total ?? "-"} soal`]
   ];
   baris.forEach(([label, val]) => {
-    doc.setTextColor(140, 150, 165);
+    doc.setTextColor(136, 149, 173);
     doc.text(label, 28, y);
-    doc.setTextColor(27, 36, 48);
+    doc.setTextColor(11, 27, 58);
     doc.text(String(val), 150, y);
     y += 20;
   });
 
   // score circle
   const cx = W / 2, cy = y + 78, r = 56;
-  doc.setDrawColor(230, 234, 240);
+  doc.setDrawColor(211, 229, 248);
   doc.setLineWidth(10);
   doc.circle(cx, cy, r, "S");
-  doc.setDrawColor(242, 169, 59);
+  doc.setDrawColor(30, 78, 156);
   doc.circle(cx, cy, r, "S");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
-  doc.setTextColor(220, 143, 30);
+  doc.setTextColor(15, 42, 92);
   doc.text(String(data.nilai ?? 0), cx, cy + 10, { align: "center" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  doc.setTextColor(140, 150, 165);
+  doc.setTextColor(136, 149, 173);
   doc.text("NILAI AKHIR", cx, cy + r + 22, { align: "center" });
 
   doc.setFontSize(8.5);
