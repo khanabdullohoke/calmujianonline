@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B3D91">
 <title>Siswa · Sistem Ujian Online</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,10 +12,13 @@
 <body>
 <div class="app-shell">
   <div class="topbar">
-    <div class="brand"><span class="mark">U</span> Ujian Saya</div>
+    <a class="brand" href="#" onclick="return false">
+      <span class="logo"><img data-logo alt="Logo SMK CALM"></span>
+      <span class="brand-text"><strong>Panel Siswa</strong><small>SMK CALM · Ujian Online</small></span>
+    </a>
     <div class="who">
       <span id="whoBadge"></span>
-      <button class="btn-logout" id="logoutBtn"><i data-ic="logout"></i> Keluar</button>
+      <button class="btn-logout" id="logoutBtn" title="Keluar"><i data-ic="logout"></i><span class="lbl">Keluar</span></button>
     </div>
   </div>
 
@@ -54,6 +58,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/brand.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
